@@ -3,8 +3,7 @@ import 'dart:ui';
 class Palette {
   static const Color primaryColor1 = Color(0xFF5771F9);
   static const Color primaryColor2 = Color(0xFFFFFFFF);
-  static const Color textColor = Color(0xFF020000);
-  
+  static const Color textColor = Color(0xFF000000);
 }
 
 class FontFamily {

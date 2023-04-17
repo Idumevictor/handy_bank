@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-
-
+import 'package:handy_bank/widgets/constants.dart';
+import 'package:handy_bank/widgets/reuseables/general_text.dart';
+import 'package:handy_bank/widgets/size_config.dart';
 
 class LogIn extends StatefulWidget {
   LogIn({super.key});
@@ -13,14 +13,14 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   bool isVisible = true;
-  final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
   final GlobalKey<FormState> _signUpKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Palette.primaryColor1,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
@@ -34,7 +34,7 @@ class _LogInState extends State<LogIn> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 27,
+                    height: getProportionateScreenHeight(27),
                   ),
                   IconButton(
                     onPressed: () {
@@ -43,61 +43,57 @@ class _LogInState extends State<LogIn> {
                     icon: Icon(Icons.arrow_back),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Welcome Back',
-                        style: TextStyle(
-                            fontFamily: 'Lato-Regular',
-                            color: Color(0xff484848),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20),
-                      ),
+                      createGeneralText(
+                          inputText: 'Welcome Back',
+                          fontSize: 20,
+                          family: FontFamily.clashVariable2,
+                          weight: FontWeight.w700,
+                          colorName: Palette.textColor),
                       Container(
-                        height: 44,
-                        width: 44,
+                        height: getProportionateScreenHeight(44),
+                        width: getProportionateScreenWidth(44),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xff025440),
+                          color: Palette.textColor,
                         ),
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                          size: 40,
+                          size: 30,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 32,
+                    height: getProportionateScreenHeight(32),
                   ),
-                  Text(
-                    'Sign in to continue',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Sign in to continue',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w400,
+                      colorName: Palette.textColor),
+
                   SizedBox(
-                    height: 32,
+                    height: getProportionateScreenHeight(32),
                   ),
-                  Text(
-                    'Email',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Phone Number',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
+
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
-                    controller: _emailController,
+                    controller: _phoneNumberController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Color(0xfff5f5f5)),
@@ -105,23 +101,29 @@ class _LogInState extends State<LogIn> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: Color(0xfff5f5f5),
-                      hintText: 'Your email@gmail.com',
+                      hintText: 'Your phone number',
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                   ),
                   SizedBox(
-                    height: 37,
+                    height: getProportionateScreenHeight(37),
                   ),
-                  Text(
-                    'Password',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Password',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
+                  // Text(
+                  //   'Password',
+                  //   style: TextStyle(
+                  //       color: Color(0xff484848),
+                  //       fontSize: 14,
+                  //       fontWeight: FontWeight.w500,
+                  //       fontFamily: 'Lato-Regular'),
+                  // ),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                     controller: _passwordController,
@@ -145,11 +147,11 @@ class _LogInState extends State<LogIn> {
                             child: isVisible
                                 ? Icon(
                                     Icons.visibility,
-                                    color: Color(0xff025440),
+                                    color: Palette.textColor,
                                   )
                                 : Icon(
                                     Icons.visibility_off,
-                                    color: Color(0xff025440),
+                                    color: Palette.textColor,
                                   ))),
                     keyboardType: TextInputType.text,
                   ),

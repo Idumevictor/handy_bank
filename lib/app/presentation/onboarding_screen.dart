@@ -18,7 +18,7 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Palette.primaryColor1,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 20, right: 20),
@@ -37,7 +37,7 @@ class _OnboardingState extends State<Onboarding> {
                 ),
               ),
               SizedBox(
-                height: 93,
+                height: getProportionateScreenHeight(93),
               ),
               Image(
                 image: AssetImage('images/onboarding1.png'),
@@ -45,61 +45,55 @@ class _OnboardingState extends State<Onboarding> {
               SizedBox(
                 height: 93,
               ),
-              Text(
-                'Manage your finance in\nthe easiest way.',
-                style: TextStyle(
-                  color: Color(0xff484848),
+              createGeneralText(
+                  inputText: 'Manage your finance in\nthe easiest way',
                   fontSize: 34,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Lato-Regular',
-                ),
-                textAlign: TextAlign.center,
+                  family: FontFamily.gilroy,
+                  weight: FontWeight.normal,
+                  colorName: Palette.textColor,
+                  textAlign: TextAlign.center),
+              SizedBox(
+                height: getProportionateScreenHeight(48),
               ),
               SizedBox(
-                height: 48,
-              ),
-              SizedBox(
-                height: 50,
+                height: getProportionateScreenHeight(50),
                 width: double.infinity,
                 child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          Color(0xff025440),
-                        ),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ))),
-                    onPressed: (() {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext) => SignUp()));
-                    }),
-                    child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                        color: Color(0xffffffff),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Lato-Regular',
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Palette.primaryColor2,
                       ),
-                    )),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ))),
+                  onPressed: (() {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext) => SignUp()));
+                  }),
+                  child: createGeneralText(
+                      inputText: 'Sign Up',
+                      fontSize: 20,
+                      family: FontFamily.clashVariable,
+                      weight: FontWeight.w600,
+                      colorName: Palette.textColor),
+                ),
               ),
               SizedBox(
-                height: 24,
+                height: getProportionateScreenHeight(24),
               ),
               RichText(
                 text: TextSpan(
                     text: 'Have an account?',
                     style: TextStyle(
-                        color: Color(0xff484848),
+                        color: Palette.textColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700),
                     children: <TextSpan>[
                       TextSpan(
                           text: ' Sign In ',
                           style: TextStyle(
-                              color: Color(0xff025440),
+                              color: Palette.primaryColor2,
                               fontSize: 18,
                               fontWeight: FontWeight.w700),
                           recognizer: TapGestureRecognizer()

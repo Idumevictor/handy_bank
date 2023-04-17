@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_bank/app/presentation/signin_page.dart';
+import 'package:handy_bank/widgets/constants.dart';
+import 'package:handy_bank/widgets/reuseables/general_text.dart';
 import 'package:handy_bank/widgets/size_config.dart';
-
 
 class SignUp extends StatefulWidget {
   SignUp({super.key});
@@ -14,18 +15,19 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool isVisible = true;
   bool isVisible1 = true;
-  final _nameController = TextEditingController();
+  final _firstController = TextEditingController();
+  final _lastController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+
   final GlobalKey<FormState> _signUpKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Palette.primaryColor1,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
@@ -48,64 +50,58 @@ class _SignUpState extends State<SignUp> {
                     icon: Icon(Icons.arrow_back),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Welcome User',
-                        style: TextStyle(
-                            fontFamily: 'Lato-Regular',
-                            color: Color(0xff484848),
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20),
-                      ),
+                      createGeneralText(
+                          inputText: 'Welcome User',
+                          fontSize: 20,
+                          family: FontFamily.clashVariable2,
+                          weight: FontWeight.w600,
+                          colorName: Palette.textColor),
                       Container(
-                        height: 44,
-                        width: 44,
+                        height: getProportionateScreenHeight(44),
+                        width: getProportionateScreenWidth(44),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xff025440),
+                          color: Palette.textColor,
                         ),
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                          size: 40,
+                          size: 30,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 22,
+                    height: getProportionateScreenHeight(22),
                   ),
-                  Text(
-                    'Sign up to join',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Sign up to join',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w400,
+                      colorName: Palette.textColor),
                   SizedBox(
                     height: 40,
                   ),
-                  Text(
-                    'Name',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Name',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
                   SizedBox(
                     height: 8,
                   ),
                   TextFormField(
-                    controller: _nameController,
+                    controller: _firstController,
                     validator: (value) {
-                      if (_nameController.text.isEmpty) {
-                        return 'Enter Name';
+                      if (_firstController.text.isEmpty) {
+                        return 'Enter first name';
                       } else {
                         return null;
                       }
@@ -123,16 +119,47 @@ class _SignUpState extends State<SignUp> {
                     keyboardType: TextInputType.name,
                   ),
                   SizedBox(
+                    height: 8,
+                  ),
+                  createGeneralText(
+                      inputText: 'Last Name',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: _lastController,
+                    validator: (value) {
+                      if (_lastController.text.isEmpty) {
+                        return 'Enter Last name';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Color(0xfff5f5f5)),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: const Color(0xfff5f5f5),
+                      hintText: 'Your last name',
+                    ),
+                    keyboardType: TextInputType.name,
+                  ),
+                  SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    'Email',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Email',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
                   SizedBox(
                     height: 8,
                   ),
@@ -140,8 +167,7 @@ class _SignUpState extends State<SignUp> {
                       controller: _emailController,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                 BorderSide(color: Color(0xfff5f5f5)),
+                            borderSide: BorderSide(color: Color(0xfff5f5f5)),
                             borderRadius: BorderRadius.circular(10)),
                         border: InputBorder.none,
                         filled: true,
@@ -159,49 +185,12 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    'Phone Number',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    controller: _phoneNumberController,
-                    validator: (value) {
-                      if (_phoneNumberController.text.length < 11) {
-                        return 'Enter complete phone number';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Color(0xfff5f5f5)),
-                          borderRadius: BorderRadius.circular(10)),
-                      border: InputBorder.none,
-                      filled: true,
-                      fillColor: Color(0xfff5f5f5),
-                      hintText: '+234',
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    'Password',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Password',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
                   SizedBox(
                     height: 8,
                   ),
@@ -232,76 +221,68 @@ class _SignUpState extends State<SignUp> {
                             child: isVisible
                                 ? Icon(
                                     Icons.visibility,
-                                    color: Color(0xff025440),
+                                    color: Palette.textColor,
                                   )
                                 : Icon(
                                     Icons.visibility_off,
-                                    color: Color(0xff025440),
+                                    color: Palette.textColor,
                                   ))),
                     keyboardType: TextInputType.text,
                   ),
                   SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    'Confirm Password',
-                    style: TextStyle(
-                        color: Color(0xff484848),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Lato-Regular'),
-                  ),
+                  createGeneralText(
+                      inputText: 'Phone Number',
+                      fontSize: 14,
+                      family: FontFamily.clashVariable2,
+                      weight: FontWeight.w500,
+                      colorName: Palette.textColor),
                   SizedBox(
                     height: 8,
                   ),
                   TextFormField(
-                    controller: _confirmPasswordController,
-                    obscureText: isVisible1,
-                    onFieldSubmitted: (value) {},
+                    controller: _phoneNumberController,
+                    validator: (value) {
+                      if (_phoneNumberController.text.length < 11) {
+                        return 'Enter complete phone number';
+                      } else {
+                        return null;
+                      }
+                    },
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xfff5f5f5)),
-                            borderRadius: BorderRadius.circular(10)),
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: const Color(0xfff5f5f5),
-                        hintText: '**********',
-                        suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                isVisible1 = !isVisible1;
-                              });
-                            },
-                            child: isVisible1
-                                ? Icon(Icons.visibility,
-                                    color: Color(0xff025440))
-                                : Icon(
-                                    Icons.visibility_off,
-                                    color: Color(0xff025440),
-                                  ))),
-                    keyboardType: TextInputType.text,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Color(0xfff5f5f5)),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: Color(0xfff5f5f5),
+                      hintText: '081',
+                    ),
+                    keyboardType: TextInputType.number,
                   ),
-                  const SizedBox(
-                    height: 27,
+                  SizedBox(
+                    height: 8,
                   ),
                   Row(
                     children: [
                       Icon(
                         Icons.check_circle,
-                        color: Color(0xff025440),
+                        color: Palette.primaryColor2,
                       ),
                       RichText(
                         text: TextSpan(
                             text: 'I agree to the ',
                             style: TextStyle(
-                                color: Color(0xff484848),
+                                color: Palette.textColor,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600),
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Terms of service ',
                                   style: TextStyle(
-                                      color: Color(0xff025440),
+                                      color: Palette.primaryColor2,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600),
                                   recognizer: TapGestureRecognizer()
@@ -319,7 +300,7 @@ class _SignUpState extends State<SignUp> {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              Color(0xff025440),
+                              Palette.primaryColor2,
                             ),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
@@ -332,7 +313,7 @@ class _SignUpState extends State<SignUp> {
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
-                            color: Color(0xffffffff),
+                            color: Palette.textColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Lato-Regular',
@@ -347,15 +328,15 @@ class _SignUpState extends State<SignUp> {
                       text: TextSpan(
                           text: 'Have an account?',
                           style: TextStyle(
-                              color: Color(0xff484848),
-                              fontSize: 12,
+                              color: Palette.textColor,
+                              fontSize: 14,
                               fontWeight: FontWeight.w400),
                           children: <TextSpan>[
                             TextSpan(
                                 text: ' Sign In ',
                                 style: TextStyle(
-                                    color: Color(0xff025440),
-                                    fontSize: 12,
+                                    color: Palette.primaryColor2,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w400),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
