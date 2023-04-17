@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:handy_bank/app/presentation/onboarding_screen.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:handy_bank/widgets/size_config.dart';
 
 import '../../widgets/constants.dart';
