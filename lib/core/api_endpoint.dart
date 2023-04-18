@@ -15,17 +15,7 @@ class ApiEndpoints {
     return 'https://handy-bank.herokuapp.com/api/login';
   }
 
-  static String retrieveAccountUser() {
+  static String retrieveAccount({required String phoneNumber}) {
     return 'https://handy-bank.herokuapp.com/api/account-number?phoneNumber=08134677901';
   }
-
-  
-
-
-
-
-  
-
-
-  
 }

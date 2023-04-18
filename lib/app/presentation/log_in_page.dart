@@ -19,6 +19,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+     SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Palette.primaryColor1,
       body: SafeArea(
@@ -114,14 +115,7 @@ class _LogInState extends State<LogIn> {
                       family: FontFamily.clashVariable2,
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
-                  // Text(
-                  //   'Password',
-                  //   style: TextStyle(
-                  //       color: Color(0xff484848),
-                  //       fontSize: 14,
-                  //       fontWeight: FontWeight.w500,
-                  //       fontFamily: 'Lato-Regular'),
-                  // ),
+                  
                   SizedBox(
                     height: getProportionateScreenHeight(8),
                   ),

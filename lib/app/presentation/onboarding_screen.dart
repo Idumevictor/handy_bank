@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_bank/app/presentation/sign_up.dart';
-import 'package:handy_bank/app/presentation/signin_page.dart';
+import 'package:handy_bank/app/presentation/log_in_page.dart';
 import 'package:handy_bank/widgets/constants.dart';
 import 'package:handy_bank/widgets/reuseables/general_text.dart';
 import 'package:handy_bank/widgets/size_config.dart';
