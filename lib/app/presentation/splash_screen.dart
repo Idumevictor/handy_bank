@@ -17,37 +17,26 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(
-        Duration(seconds: 5),
-        () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext) => Onboarding())));
-  }
-
-  @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
+    return AnimatedSplashScreen(
+      centered: true,
       backgroundColor: Palette.primaryColor1,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      duration: 2500,
+      splashTransition: SplashTransition.scaleTransition,
+      splash: Column(
         children: [
-          SizedBox(
-            height: getProportionateScreenHeight(342),
-          ),
-          Center(child: Image(image: AssetImage('images/splashscreen.png'))),
-          Center(
-            child: createGeneralText(
-                inputText: 'Handy Bank',
-                fontSize: 64,
-                family: FontFamily.gilroy,
-                weight: FontWeight.bold,
-                colorName: Palette.primaryColor2),
-          ),
+          Image(image: AssetImage('images/splashscreen.png')),
+          createGeneralText(
+              inputText: 'Handy Bank',
+              fontSize: 64,
+              family: FontFamily.gilroy,
+              weight: FontWeight.bold,
+              colorName: Palette.primaryColor2),
         ],
       ),
+      nextScreen: Onboarding(),
+      splashIconSize: 250,
     );
   }
 }
