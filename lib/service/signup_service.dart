@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:handy_bank/app/presentation/sign_up.dart';
 import 'package:handy_bank/core/api_endpoint.dart';
 import 'package:handy_bank/model/request_model/log_in_request_model.dart';
 import 'package:handy_bank/model/request_model/sign_up_request_model.dart';
@@ -9,9 +10,9 @@ import 'package:handy_bank/model/response_model/sign_up_response_model.dart';
 class SignUPUserService {
   static final Dio dio = Dio();
 
-  static Future<SignUpUserResponseModel?> LogIn(
+  static Future<SignUpUserResponseModel?> signUp(
       SignUpUserRequestModel signUpUser) async {
-    final url = ApiEndpoints.logInUser();
+    final url = ApiEndpoints.signUpUser();
     print(url);
     try {
       var response = await dio.post(

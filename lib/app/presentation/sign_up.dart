@@ -1,6 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_bank/app/presentation/log_in_page.dart';
+import 'package:handy_bank/core/loading_widget.dart';
+import 'package:handy_bank/model/request_model/sign_up_request_model.dart';
+import 'package:handy_bank/model/response_model/sign_up_response_model.dart';
+import 'package:handy_bank/service/signup_service.dart';
 import 'package:handy_bank/widgets/constants.dart';
 import 'package:handy_bank/widgets/reuseables/general_text.dart';
 import 'package:handy_bank/widgets/size_config.dart';
@@ -20,8 +24,7 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  final GlobalKey<FormState> _signUpKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _SignUpState extends State<SignUp> {
           ),
           child: SingleChildScrollView(
             child: Form(
-              key: _signUpKey,
+              key: _key,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -358,5 +361,30 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  void createAccount() async {
+    if (_key.currentState?.validate() ?? false) {
+      _key.currentState?.save();
+
+      SignUpUserRequestModel registerUserRequestModel = SignUpUserRequestModel(
+          firstName: _firstController.text,
+          lastName: _lastController.text,
+          emailAddress: _emailController.text,
+          password: _passwordController.text,
+          phoneNumber: _phoneNumberController.text);
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) =>
+              ProgressDialog(message: 'Loading...'));
+
+      var response = await SignUPUserService.signUp(registerUserRequestModel);
+      if (response!.message == 'Successful') {
+        final String ref = response.newUser.toString();
+        Navigator.pop(context);
+      }
+    }
   }
 }

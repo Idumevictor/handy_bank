@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:handy_bank/core/api_endpoint.dart';
+import 'package:handy_bank/data/token_storage.dart';
 import 'package:handy_bank/model/response_model/retrieve_account_response_model.dart';
-
 
 class RetrieveAccountService {
   static final Dio dio = Dio();
@@ -11,12 +11,10 @@ class RetrieveAccountService {
       {required String phoneNUmber}) async {
     final url = ApiEndpoints.retrieveAccount(phoneNumber: phoneNUmber);
     print(url);
-    final String token = apiToken;
+    final String token = TokenStorage.retrieveToken();
     try {
-      var response = await dio.get(
-        url,
-          options: Options(headers: {'Authorization': 'Bearer $token'})
-      );
+      var response = await dio.get(url,
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       print(response.data);
       print(response.statusCode);
       if (response.statusCode == 200) {

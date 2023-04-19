@@ -1,5 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:handy_bank/core/loading_widget.dart';
+import 'package:handy_bank/data/token_storage.dart';
+import 'package:handy_bank/model/request_model/log_in_request_model.dart';
+import 'package:handy_bank/service/login_service.dart';
 import 'package:handy_bank/widgets/constants.dart';
 import 'package:handy_bank/widgets/reuseables/general_text.dart';
 import 'package:handy_bank/widgets/size_config.dart';
@@ -15,11 +19,11 @@ class _LogInState extends State<LogIn> {
   bool isVisible = true;
   final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
-  final GlobalKey<FormState> _signUpKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-     SizeConfig.init(context);
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Palette.primaryColor1,
       body: SafeArea(
@@ -30,7 +34,7 @@ class _LogInState extends State<LogIn> {
           ),
           child: SingleChildScrollView(
             child: Form(
-              key: _signUpKey,
+              key: _key,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,7 +83,6 @@ class _LogInState extends State<LogIn> {
                       family: FontFamily.clashVariable2,
                       weight: FontWeight.w400,
                       colorName: Palette.textColor),
-
                   SizedBox(
                     height: getProportionateScreenHeight(32),
                   ),
@@ -89,7 +92,6 @@ class _LogInState extends State<LogIn> {
                       family: FontFamily.clashVariable2,
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
-
                   SizedBox(
                     height: getProportionateScreenHeight(8),
                   ),
@@ -115,7 +117,6 @@ class _LogInState extends State<LogIn> {
                       family: FontFamily.clashVariable2,
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
-                  
                   SizedBox(
                     height: getProportionateScreenHeight(8),
                   ),
@@ -149,77 +150,6 @@ class _LogInState extends State<LogIn> {
                                   ))),
                     keyboardType: TextInputType.text,
                   ),
-//                   // Row(
-//                   //   mainAxisAlignment: MainAxisAlignment.end,
-//                   //   children: [
-//                   //     TextButton(
-//                   //       onPressed: () {
-//                   //         Navigator.of(context).push(MaterialPageRoute(
-//                   //             builder: (BuildContext) => Home()));
-//                   //       },
-//                   //       child: Text(
-//                   //         'Forget Password?',
-//                   //         style: TextStyle(
-//                   //             color: Color(0xff025440),
-//                   //             fontSize: 12,
-//                   //             fontWeight: FontWeight.w600,
-//                   //             fontFamily: 'Lato-Regular'),
-//                   //       ),
-//                   //     )
-//                   //   ],
-//                   // ),
-//                   // SizedBox(
-//                   //   height: 40,
-//                   // ),
-//                   SizedBox(
-//                     height: 50,
-//                     width: double.infinity,
-//                     child: ElevatedButton(
-//                         style: ButtonStyle(
-//                             backgroundColor: MaterialStateProperty.all(
-//                               Color(0xff025440),
-//                             ),
-//                             shape: MaterialStateProperty.all<
-//                                 RoundedRectangleBorder>(RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10.0),
-//                             ))),
-//                         onPressed: (() {
-//                           Navigator.of(context).push(MaterialPageRoute(
-//                               builder: (BuildContext) => Nav()));
-//                         }),
-//                         child: Text(
-//                           'Sign In',
-//                           style: TextStyle(
-//                             color: Color(0xfff5f5f5),
-//                             fontSize: 18,
-//                             fontWeight: FontWeight.w700,
-//                             fontFamily: 'Raleway-Regular',
-//                           ),
-//                         )),
-//                   ),
-//                   SizedBox(
-//                     height: 36,
-//                   ),
-//                   Center(
-//                     child: RichText(
-//                       text: TextSpan(
-//                           text: 'You don\'t have an account?',
-//                           style: TextStyle(
-//                               color: Color(0xff484848),
-//                               fontSize: 10,
-//                               fontWeight: FontWeight.w400),
-//                           children: <TextSpan>[
-//                             TextSpan(
-//                                 text: ' Sign up ',
-//                                 style: TextStyle(
-//                                     color: Color(0xff025440),
-//                                     fontSize: 10,
-//                                     fontWeight: FontWeight.w600),
-//                                 recognizer: TapGestureRecognizer()
-//                                   ..onTap = () {})
-//                           ]),
-//                     ),
-                  // ),
                   const SizedBox(
                     height: 45,
                   )
@@ -230,5 +160,25 @@ class _LogInState extends State<LogIn> {
         ),
       ),
     );
+  }
+
+  void logInUser() async {
+    if (_key.currentState?.validate() ?? false) {
+      _key.currentState?.save();
+      LogInUserRequestModel logInUser = LogInUserRequestModel(
+          phoneNumber: _phoneNumberController.text,
+          password: _passwordController.text);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) =>
+              ProgressDialog(message: 'Loading...'));
+      var response = await LogInUserService.LogIn(logInUser);
+      if (response!.message == 'Successful') {
+        await TokenStorage.storeToken(response.token.toString());
+      } else {
+        Navigator.pop(context);
+      }
+    }
   }
 }
