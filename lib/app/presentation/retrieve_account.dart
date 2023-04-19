@@ -33,6 +33,7 @@ class _RetrieveNumberScreenState extends State<RetrieveNumberScreen> {
                 height: getProportionateScreenHeight(50),
               ),
               TextFormField(
+                
                 controller: _numberController,
                 decoration: InputDecoration(
                     suffixIcon: isLoading

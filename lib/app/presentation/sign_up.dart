@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_bank/app/presentation/log_in_page.dart';
 import 'package:handy_bank/core/loading_widget.dart';
+import 'package:handy_bank/data/token_storage.dart';
 import 'package:handy_bank/model/request_model/sign_up_request_model.dart';
 import 'package:handy_bank/model/response_model/sign_up_response_model.dart';
 import 'package:handy_bank/service/signup_service.dart';
@@ -92,7 +93,7 @@ class _SignUpState extends State<SignUp> {
                     height: 40,
                   ),
                   createGeneralText(
-                      inputText: 'Name',
+                      inputText: 'First Name',
                       fontSize: 14,
                       family: FontFamily.clashVariable2,
                       weight: FontWeight.w500,
@@ -117,7 +118,7 @@ class _SignUpState extends State<SignUp> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: const Color(0xfff5f5f5),
-                      hintText: 'Your full name',
+                      hintText: 'Your first name',
                     ),
                     keyboardType: TextInputType.name,
                   ),
@@ -200,7 +201,7 @@ class _SignUpState extends State<SignUp> {
                   TextFormField(
                     controller: _passwordController,
                     validator: (value) {
-                      if (_passwordController.text.isEmpty) {
+                      if (_passwordController.text.length < 8) {
                         return 'Enter Password';
                       } else {
                         return null;
@@ -255,8 +256,7 @@ class _SignUpState extends State<SignUp> {
                     },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Color(0xfff5f5f5)),
+                          borderSide: BorderSide(color: Color(0xfff5f5f5)),
                           borderRadius: BorderRadius.circular(10)),
                       border: InputBorder.none,
                       filled: true,
@@ -381,8 +381,10 @@ class _SignUpState extends State<SignUp> {
               ProgressDialog(message: 'Loading...'));
 
       var response = await SignUPUserService.signUp(registerUserRequestModel);
-      if (response!.message == 'Successful') {
-        final String ref = response.newUser.toString();
+      if (response!.message == 'User Created Successfully') {
+        await TokenStorage.storeToken(response.newUser.toString());
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext) => LogIn()));
         Navigator.pop(context);
       }
     }

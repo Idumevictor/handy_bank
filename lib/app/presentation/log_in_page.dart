@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:handy_bank/app/presentation/retrieve_account.dart';
 import 'package:handy_bank/core/loading_widget.dart';
 import 'package:handy_bank/data/token_storage.dart';
 import 'package:handy_bank/model/request_model/log_in_request_model.dart';
@@ -150,9 +151,34 @@ class _LogInState extends State<LogIn> {
                                   ))),
                     keyboardType: TextInputType.text,
                   ),
-                  const SizedBox(
-                    height: 45,
-                  )
+                  SizedBox(
+                    height: getProportionateScreenHeight(150),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Palette.primaryColor2,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ))),
+                        onPressed: (() {
+                          logInUser();
+                        }),
+                        child: Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: Palette.textColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Lato-Regular',
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ),
@@ -174,8 +200,11 @@ class _LogInState extends State<LogIn> {
           builder: (BuildContext context) =>
               ProgressDialog(message: 'Loading...'));
       var response = await LogInUserService.LogIn(logInUser);
-      if (response!.message == 'Successful') {
+      if (response!.message == 'Logged in successfully') {
         await TokenStorage.storeToken(response.token.toString());
+
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext) => RetrieveNumberScreen()));
       } else {
         Navigator.pop(context);
       }

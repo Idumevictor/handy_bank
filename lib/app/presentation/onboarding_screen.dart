@@ -47,7 +47,7 @@ class _OnboardingState extends State<Onboarding> {
               ),
               createGeneralText(
                   inputText: 'Manage your finance in\nthe easiest way',
-                  fontSize: 34,
+                  fontSize: 26,
                   family: FontFamily.gilroy,
                   weight: FontWeight.normal,
                   colorName: Palette.textColor,
