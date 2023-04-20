@@ -33,9 +33,16 @@ class _RetrieveNumberScreenState extends State<RetrieveNumberScreen> {
                 height: getProportionateScreenHeight(50),
               ),
               TextFormField(
-                
                 controller: _numberController,
                 decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Palette.primaryColor2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    border: InputBorder.none,
+                    filled: true,
+                    fillColor: Palette.primaryColor2,
+                    hintText: '081',
                     suffixIcon: isLoading
                         ? SizedBox(
                             height: getProportionateScreenHeight(5),

@@ -382,10 +382,9 @@ class _SignUpState extends State<SignUp> {
 
       var response = await SignUPUserService.signUp(registerUserRequestModel);
       if (response!.message == 'User Created Successfully') {
-        await TokenStorage.storeToken(response.newUser.toString());
+        Navigator.pop(context);
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext) => LogIn()));
-        Navigator.pop(context);
       }
     }
   }
