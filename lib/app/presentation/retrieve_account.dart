@@ -22,7 +22,9 @@ class _RetrieveNumberScreenState extends State<RetrieveNumberScreen> {
     SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Palette.primaryColor1,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Palette.primaryColor1,
+      ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Form(

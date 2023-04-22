@@ -29,9 +29,8 @@ class _LogInState extends State<LogIn> {
       backgroundColor: Palette.primaryColor1,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(
-            left: 20,
-            right: 20,
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
           ),
           child: SingleChildScrollView(
             child: Form(
@@ -70,7 +69,7 @@ class _LogInState extends State<LogIn> {
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                          size: 30,
+                          size: getProportionateScreenWidth(30),
                         ),
                       ),
                     ],
@@ -155,7 +154,7 @@ class _LogInState extends State<LogIn> {
                     height: getProportionateScreenHeight(150),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: getProportionateScreenHeight(60),
                     width: double.infinity,
                     child: ElevatedButton(
                         style: ButtonStyle(
@@ -173,7 +172,7 @@ class _LogInState extends State<LogIn> {
                           'Log In',
                           style: TextStyle(
                             color: Palette.textColor,
-                            fontSize: 20,
+                            fontSize: getProportionateScreenWidth(20),
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Lato-Regular',
                           ),

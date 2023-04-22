@@ -14,6 +14,11 @@ class SignUPUserService {
       SignUpUserRequestModel signUpUser) async {
     final url = ApiEndpoints.signUpUser();
     print(url);
+    print(signUpUser.emailAddress);
+    print(signUpUser.firstName);
+    print(signUpUser.lastName);
+    print(signUpUser.password);
+    print(signUpUser.phoneNumber);
     try {
       var response = await dio.post(
         url,
@@ -22,7 +27,7 @@ class SignUPUserService {
       );
       print(response.data);
       print(response.statusCode);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         var result = SignUpUserResponseModel.fromJson(response.data);
         return result;
       }
@@ -33,8 +38,7 @@ class SignUPUserService {
         print(e.response!.data);
         print(e.response!.statusCode);
 
-        return SignUpUserResponseModel(
-            message: e.response!.data['message']);
+        return SignUpUserResponseModel(message: e.response!.data['message']);
       } else {}
     }
   }

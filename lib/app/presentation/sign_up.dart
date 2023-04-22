@@ -34,9 +34,8 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: Palette.primaryColor1,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(
-            left: 20,
-            right: 20,
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
           ),
           child: SingleChildScrollView(
             child: Form(
@@ -90,7 +89,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w400,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                   ),
                   createGeneralText(
                       inputText: 'First Name',
@@ -99,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                     controller: _firstController,
@@ -118,12 +117,12 @@ class _SignUpState extends State<SignUp> {
                       border: InputBorder.none,
                       filled: true,
                       fillColor: const Color(0xfff5f5f5),
-                      hintText: 'Your first name',
+                      hintText: 'Enter first name',
                     ),
                     keyboardType: TextInputType.name,
                   ),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   createGeneralText(
                       inputText: 'Last Name',
@@ -132,7 +131,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                     controller: _lastController,
@@ -156,7 +155,7 @@ class _SignUpState extends State<SignUp> {
                     keyboardType: TextInputType.name,
                   ),
                   SizedBox(
-                    height: 12,
+                    height: getProportionateScreenHeight(12),
                   ),
                   createGeneralText(
                       inputText: 'Email',
@@ -165,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                       controller: _emailController,
@@ -187,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       }),
                   SizedBox(
-                    height: 12,
+                    height: getProportionateScreenHeight(12),
                   ),
                   createGeneralText(
                       inputText: 'Password',
@@ -196,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                     controller: _passwordController,
@@ -234,7 +233,7 @@ class _SignUpState extends State<SignUp> {
                     keyboardType: TextInputType.text,
                   ),
                   SizedBox(
-                    height: 12,
+                    height: getProportionateScreenHeight(12),
                   ),
                   createGeneralText(
                       inputText: 'Phone Number',
@@ -243,7 +242,7 @@ class _SignUpState extends State<SignUp> {
                       weight: FontWeight.w500,
                       colorName: Palette.textColor),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   TextFormField(
                     controller: _phoneNumberController,
@@ -266,7 +265,7 @@ class _SignUpState extends State<SignUp> {
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(
-                    height: 8,
+                    height: getProportionateScreenHeight(8),
                   ),
                   Row(
                     children: [
@@ -279,14 +278,14 @@ class _SignUpState extends State<SignUp> {
                             text: 'I agree to the ',
                             style: TextStyle(
                                 color: Palette.textColor,
-                                fontSize: 12,
+                                fontSize: getProportionateScreenWidth(12),
                                 fontWeight: FontWeight.w600),
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Terms of service ',
                                   style: TextStyle(
                                       color: Palette.primaryColor2,
-                                      fontSize: 12,
+                                      fontSize: getProportionateScreenWidth(12),
                                       fontWeight: FontWeight.w600),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {})
@@ -295,10 +294,10 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: getProportionateScreenHeight(60),
                     width: double.infinity,
                     child: ElevatedButton(
                         style: ButtonStyle(
@@ -310,21 +309,20 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(10.0),
                             ))),
                         onPressed: (() {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext) => LogIn()));
+                          createAccount();
                         }),
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
                             color: Palette.textColor,
-                            fontSize: 20,
+                            fontSize: getProportionateScreenWidth(20),
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Lato-Regular',
                           ),
                         )),
                   ),
                   SizedBox(
-                    height: 36,
+                    height: getProportionateScreenHeight(36),
                   ),
                   Center(
                     child: RichText(
@@ -332,14 +330,14 @@ class _SignUpState extends State<SignUp> {
                           text: 'Have an account?',
                           style: TextStyle(
                               color: Palette.textColor,
-                              fontSize: 14,
+                              fontSize: getProportionateScreenWidth(14),
                               fontWeight: FontWeight.w400),
                           children: <TextSpan>[
                             TextSpan(
                                 text: ' Sign In ',
                                 style: TextStyle(
                                     color: Palette.primaryColor2,
-                                    fontSize: 14,
+                                    fontSize: getProportionateScreenWidth(14),
                                     fontWeight: FontWeight.w400),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
@@ -351,8 +349,8 @@ class _SignUpState extends State<SignUp> {
                           ]),
                     ),
                   ),
-                  const SizedBox(
-                    height: 45,
+                  SizedBox(
+                    height: getProportionateScreenHeight(45),
                   )
                 ],
               ),
@@ -366,6 +364,8 @@ class _SignUpState extends State<SignUp> {
   void createAccount() async {
     if (_key.currentState?.validate() ?? false) {
       _key.currentState?.save();
+
+      print('waiting for endpoint');
 
       SignUpUserRequestModel registerUserRequestModel = SignUpUserRequestModel(
           firstName: _firstController.text,
@@ -385,6 +385,8 @@ class _SignUpState extends State<SignUp> {
         Navigator.pop(context);
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext) => LogIn()));
+      } else {
+        Navigator.pop(context);
       }
     }
   }
