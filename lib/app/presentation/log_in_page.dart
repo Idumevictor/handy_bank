@@ -126,7 +126,7 @@ class _LogInState extends State<LogIn> {
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                const BorderSide(color: Color(0xfff5f5f5)),
+                                 BorderSide(color: Color(0xfff5f5f5)),
                             borderRadius: BorderRadius.circular(10)),
                         border: InputBorder.none,
                         filled: true,

@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
-                          size: 30,
+                          size: getProportionateScreenWidth(30),
                         ),
                       ),
                     ],
@@ -349,9 +349,6 @@ class _SignUpState extends State<SignUp> {
                           ]),
                     ),
                   ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(45),
-                  )
                 ],
               ),
             ),
